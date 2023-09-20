@@ -38,6 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Terrain_TileMap
+    uniqueID: 3449516195
+    locked: 0
+  - name: Decor_TileMap
+    uniqueID: 3073955433
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
