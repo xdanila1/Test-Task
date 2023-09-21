@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public interface IWeapon : IItem
 {
+
     int Damage { get; }
     float FireRate { get; }
     AudioClip ShotSound { get; }
