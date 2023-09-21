@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public interface IGun : IWeapon
 {
-   
-    IAmmunition ammo { get; }
+    int MagazineSize { get; }
+    float TimeReload { get; }
+    AmmunitionItem Ammo { get; }
 }

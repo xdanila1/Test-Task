@@ -9,11 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c703a61bfbd69048b2602ffb58e552e, type: 3}
-  m_Name: AK-74
+  m_Script: {fileID: 11500000, guid: c6c78c33ac183424ba46a327439b448a, type: 3}
+  m_Name: Ak-74
   m_EditorClassIdentifier: 
+  _damage: 15
+  _fireRate: 1
+  _shotSound: {fileID: 0}
   _name: Ak-74
   _description: "\u0412 \u0441\u043B\u0443\u0447\u0430\u0435 \u043A\u043B\u0438\u043D\u0430,
     \u0430\u0432\u0430\u0440\u0438\u0439\u043D\u043E \u0443\u0434\u0430\u0440\u0438\u0442\u044C
     \u043F\u0440\u0438\u043A\u043B\u0430\u0434\u043E\u043C"
   _icon: {fileID: 2800000, guid: 6532bc2c52f179142a7333cc0f5faeda, type: 3}
+  _isStored: 0
+  _ammo: {fileID: 11400000, guid: ab1a25d19ba4c1241b60d4e9e6b44bf1, type: 2}
+  _magazineSize: 30
+  _timeReload: 1.25

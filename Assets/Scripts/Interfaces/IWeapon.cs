@@ -5,9 +5,8 @@ using UnityEngine;
 /// <summary>
 /// It is planned that this interface is only for melee weapons
 /// </summary>
-public interface IWeapon
+public interface IWeapon : IItem
 {
-    Item ItemAsset { get; }
     int Damage { get; }
     float FireRate { get; }
     AudioClip ShotSound { get; }

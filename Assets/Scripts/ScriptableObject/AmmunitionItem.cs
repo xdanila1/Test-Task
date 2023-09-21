@@ -6,18 +6,16 @@ using UnityEngine;
 public class AmmunitionItem : ScriptableObject, IAmmunition
 {
 
-    //[SerializeField] private string _name;    // duplicate code contentItem :(
-    //[SerializeField] private string _description;
-    //[SerializeField] private Texture2D _icon;
-    //[SerializeField] private bool _isStored;
+    [SerializeField] private string _name;    // duplicate code contentItem :(
+    [SerializeField] private string _description;
+    [SerializeField] private Sprite _icon;
+    [SerializeField] private bool _isStored;
     [SerializeField] private float _damageBullet;
-    [SerializeField] private Item _itemAsset;
 
 
-    //public string Name { get => _name; }
-    //public string Description { get => _description; }
-    //public Texture2D Icon { get => _icon; }
-    //public bool IsStored { get => _isStored; }
+    public string Name { get => _name; }
+    public string Description { get => _description; }
+    public Sprite Icon { get => _icon; }
+    public bool IsStored { get => _isStored; }
     public float DamageBullet  {get => _damageBullet;}
-    public Item ItemAsset { get =>_itemAsset; }
 }

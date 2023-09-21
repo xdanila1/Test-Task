@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IAmmunition
+public interface IAmmunition : IItem
 {
-    Item ItemAsset { get; }
     float DamageBullet { get; }  // buf for gun damage
 }
