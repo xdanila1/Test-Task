@@ -5,41 +5,63 @@ using System;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] private InventoryCell _CellTemplate;
     [SerializeField] private Transform _container;
-    [SerializeField] private List<ScriptableObject> _Assets;
+    [SerializeField] private InventoryCell[] _cellsInventory;
+    
 
     public Action<IItem> onItemAdded;
 
-    private List<IItem> _items;
-    void Start()
-    {
-        _items = new List<IItem>();
-        for (int i = 0; i < _Assets.Count; i++)
-        {
-            var asset = _Assets[i];
-            if (!(asset is IItem item)) Debug.LogError("В инвентарь помещен не игровой предмет");
-            else _items.Add(item);
-        }
-        Render(_items);
+    private bool _inventoryOverflowing;
 
-    }
-    public void Render(List<IItem> items)
+    public bool Overflowing { get => _inventoryOverflowing; }
+
+    //private List<IItem> _items;
+    //void OnValidate()
+    //{
+    //    _items = new List<IItem>();
+    //   if(_Assets!=null) for (int i = 0; i < _Assets.Count; i++)
+    //    {
+    //        var asset = _Assets[i];
+    //        if (!(asset is IItem item)) Debug.LogError("В инвентарь помещен не игровой предмет");
+    //        else _items.Add(item);
+    //    }
+
+
+    //}
+    private void Start()
     {
-        foreach (IItem item in items)
-        {
-            var cell = Instantiate(_CellTemplate, _container);
-            cell.RenderItem(item);
-        }
+        //RenderInventory(_items);
     }
+    //public void RenderInventory(InventoryCell[] cells)
+    //{
+    //    foreach (var item in cells)
+    //    {
+    //        if(!item.isEmpty)   item.RenderItem(item.Item, item.Count);
+    //    }
+    //}
 
     public void AddItem(IItem item, int count)
     {
+        int idEmptyCell=-1;
         print($"В инвентарь добавлено {item.Name} в количестве {count} штук(и)");
-        for (int i = 0; i < count; i++)
+
+        for (int i = 0; i < _cellsInventory.Length; i++)
         {
-            _items.Add(item);
-            onItemAdded?.Invoke(item);
+            if (_cellsInventory[i].isEmpty && idEmptyCell<0) idEmptyCell = i;
+
+            if(_cellsInventory[i].Item == item && _cellsInventory[i].Item.IsStored)
+            {
+                //check overflowing
+                _cellsInventory[i].RenderItem(item, count);
+                return;
+            }
+            if(i==_cellsInventory.Length-1 && idEmptyCell>=0)
+            {
+                _cellsInventory[idEmptyCell].RenderItem(item, count);
+            }
         }
+        print("Пустая ячейка на: " + idEmptyCell);
+        if (idEmptyCell < 0) _inventoryOverflowing = true;
+        onItemAdded?.Invoke(item);
     }
 }
