@@ -27,7 +27,6 @@ public class ItemGameObject : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print(collision.gameObject);
         var collector = collision.gameObject.GetComponent<IPickable>();
         if (collector != null && !collector.Overflowing) collector.PickUp(_item, count);
         else return;

@@ -7,12 +7,11 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField] private Transform _container;
     [SerializeField] private InventoryCell[] _cellsInventory;
+    [SerializeField] private float _idSelectCell = -1;
     
 
     public Action<IItem> onItemAdded;
-
     private bool _inventoryOverflowing;
-
     public bool Overflowing { get => _inventoryOverflowing; }
 
     //private List<IItem> _items;
@@ -30,6 +29,7 @@ public class Inventory : MonoBehaviour
     //}
     private void Start()
     {
+        InitializingCells();
         //RenderInventory(_items);
     }
     //public void RenderInventory(InventoryCell[] cells)
@@ -39,6 +39,13 @@ public class Inventory : MonoBehaviour
     //        if(!item.isEmpty)   item.RenderItem(item.Item, item.Count);
     //    }
     //}
+    public void InitializingCells()
+    {
+        for(int i=0;i<_cellsInventory.Length;i++)
+        {
+            _cellsInventory[i].IdCell = i;
+        }
+    }
 
     public void AddItem(IItem item, int count)
     {
@@ -63,5 +70,13 @@ public class Inventory : MonoBehaviour
         print("Пустая ячейка на: " + idEmptyCell);
         if (idEmptyCell < 0) _inventoryOverflowing = true;
         onItemAdded?.Invoke(item);
+    }
+    
+    public void DeselectCell()
+    {
+        foreach (var cell in _cellsInventory)
+        {
+            cell.Deselect();
+        }
     }
 }

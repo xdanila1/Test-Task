@@ -12,7 +12,7 @@ public class ContentItem : ScriptableObject, IItem
     [SerializeField] private bool _isStored;
 
 
-    public string Name { get; }
+    public string Name { get => _name; }
     public string Description { get => _description; }
     public Sprite Icon { get => _icon; }
     public bool IsStored {get =>_isStored;}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 15
   _fireRate: 1
-  _shotSound: {fileID: 0}
+  _shotSound: {fileID: 8300000, guid: ec891f2408affca41ab53e4385488dc3, type: 3}
   _name: Ak-74
   _description: "\u0412 \u0441\u043B\u0443\u0447\u0430\u0435 \u043A\u043B\u0438\u043D\u0430,
     \u0430\u0432\u0430\u0440\u0438\u0439\u043D\u043E \u0443\u0434\u0430\u0440\u0438\u0442\u044C

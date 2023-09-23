@@ -17,19 +17,21 @@ public class InventoryCell : MonoBehaviour
     [SerializeField] int _idCell;
     [SerializeField] bool _overflowing; // max count 64
     [SerializeField] bool _isEmpty =true;
+    [SerializeField] Image _selectIcon;
 
+    private IItem _item;
+
+    public int IdCell { get; set; }
     public IItem Item { get => _item;}
     public bool isEmpty{ get => _isEmpty;}
     public int Count { get => _count; }
 
-    private IItem _item;
 
     public void RenderItem(IItem item, int count)
     {
         print("Render Item");
         if(item.IsStored)
         {
-            print("wtwt");
             _countUI.enabled = true;
             if(!_isEmpty)
             {
@@ -47,5 +49,19 @@ public class InventoryCell : MonoBehaviour
         _count = count;
         _isEmpty = false;
     }
+    public void DeleteCell()
+    {
+        _isEmpty = true;
+        _imageUI.enabled = false;
+        _countUI.enabled = false;
+    }
 
+    public void Select()
+    {
+        _selectIcon.enabled = true;
+    }
+    public void Deselect()
+    {
+        _selectIcon.enabled = false;
+    }
 }
