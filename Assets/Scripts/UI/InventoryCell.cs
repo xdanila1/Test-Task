@@ -14,7 +14,6 @@ public class InventoryCell : MonoBehaviour
 
     [Header("Cells Info")]
     [SerializeField] TextMeshProUGUI _countUI;
-    [SerializeField] int _idCell;
     [SerializeField] bool _overflowing; // max count 64
     [SerializeField] bool _isEmpty =true;
     [SerializeField] Image _selectIcon;

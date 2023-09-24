@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Only for firearms. For melee weapons, use IWeapon
 /// </summary>
-public interface IGun : IWeapon
+public interface IGun //: Weapon
 {
     int MagazineSize { get; }
     float TimeReload { get; }
