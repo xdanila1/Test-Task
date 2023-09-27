@@ -23,7 +23,7 @@ public class AnimateManager : MonoBehaviour
     }
     public void AnimateAttack()
     {
-        
+        _anim.SetTrigger("Attack");
     }
 
     void Update()

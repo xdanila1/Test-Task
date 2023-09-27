@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// It is planned that this interface is only for melee weapons
-/// </summary>
-public abstract class Weapon : ScriptableObject, IItem // надо бы предмет наследовать от SO...
+
+public abstract class Weapon : ScriptableObject, IItem // надо бы и предмет наследовать от SO...
 {
+
     // Weapon
     public abstract int Damage { get; }
     public abstract float FireRate { get; }

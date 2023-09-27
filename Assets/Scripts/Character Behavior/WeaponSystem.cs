@@ -25,12 +25,13 @@ public class WeaponSystem : MonoBehaviour
 
         _shotSound.pitch = Random.Range(0.9f, 1f);
         _cooldown = Time.time + 1f / _weapon.FireRate; // скорострельность в секунду
+
         Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, _rangeAttack, _layerEnemy.value);
         foreach (var obj in objects)
         {
             print(obj.name);
-            IDamagble enemy = obj.GetComponent<IDamagble>();
-            if (enemy != null)
+            HealthSystem enemy = obj.GetComponent<HealthSystem>();
+            if (enemy != null )
             {
                 Debug.DrawLine(transform.position, obj.transform.position, Color.green, 1f);
                 print(enemy);
