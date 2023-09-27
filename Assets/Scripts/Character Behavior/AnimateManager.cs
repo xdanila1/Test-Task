@@ -23,7 +23,13 @@ public class AnimateManager : MonoBehaviour
     }
     public void AnimateAttack()
     {
-        _anim.SetTrigger("Attack");
+        //check clip played
+        //if(!_anim.GetCurrentAnimatorStateInfo(0).IsName("Attack Animation")) _anim.SetTrigger("Attack");
+        _anim.SetBool("IsAttack",true);
+    }
+    public void StopAttackAnimation()
+    {
+        _anim.SetBool("IsAttack", false);
     }
 
     void Update()
