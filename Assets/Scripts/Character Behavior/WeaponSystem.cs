@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 public class WeaponSystem : MonoBehaviour
 {
@@ -10,12 +11,28 @@ public class WeaponSystem : MonoBehaviour
     [SerializeField] private float _rangeAttack;
     [SerializeField] private AudioSource _shotSound;
     [SerializeField] private LayerMask _layerEnemy;
+    [SerializeField] private TextMeshProUGUI _magazineUI;
 
-    private float _cooldown;
+
+    private float _delayFiring;
+    private float _delayReload;
+    private float _timeToReload;
     private HealthSystem _target;
+    private int _magazineSize;
+    private int _currentMagazine;
 
     public UnityEvent OnAttack;
+    public UnityEvent OnReload;
 
+    public void Reload()
+    {
+        if (Time.time < _delayReload) return;
+        _currentMagazine = _magazineSize;
+        _magazineUI.text = $"{_currentMagazine}/{_magazineSize}";
+        _delayReload = Time.time+_timeToReload;
+        print($"Время:{Time.time}  Время когда можно стрелять {_delayReload}");
+        OnReload.Invoke();
+    }
     public void PressAttack()
     {
         InvokeRepeating("AttackWeapon", 0, 0.05f);
@@ -28,24 +45,29 @@ public class WeaponSystem : MonoBehaviour
     public void AttackWeapon()
     {
         //if (_target == null) return;
-        if (Time.time < _cooldown) return;
+        if (Time.time < _delayFiring) return;
+        if (Time.time < _delayReload) return;
 
         _shotSound.pitch = Random.Range(0.9f, 1f);
-        _cooldown = Time.time + 1f / _weapon.FireRate; // скорострельность в секунду
+        _delayFiring = Time.time + 1f / _weapon.FireRate; // скорострельность в секунду
+        if(_currentMagazine<=0)
+        {
+            Reload();
+            return;
+        }
 
-        HealthSystem test;
-        test = FindEnemy();
-        print(FindEnemy());
-        print(test);
+
         if(_target==null) _target = FindEnemy();
         else
         {
+            
             print("Атака на :"+_target);
             _target.TakeDamage(_weapon.Damage);
             if (_target.IsDead) _target = null;
+            _currentMagazine--;
+            _magazineUI.text = $"{_currentMagazine}/{_magazineSize}";
             OnAttack.Invoke();
         }
-        print(_target);
     }
 
     private HealthSystem FindEnemy()
@@ -54,11 +76,9 @@ public class WeaponSystem : MonoBehaviour
         foreach (var obj in objects)
         {
             HealthSystem enemy = obj.GetComponent<HealthSystem>();
-            print("Возвращаю:" + enemy);
             if (enemy != null && !enemy.IsDead)
             {
                 Debug.DrawLine(transform.position, obj.transform.position, Color.green, 1f);
-                print("Возвращаю:" + enemy);
                 return enemy;
             }
         }
@@ -68,7 +88,14 @@ public class WeaponSystem : MonoBehaviour
     private void Start()
     {
         _shotSound.clip = _weapon.ShotSound;
-        _cooldown = Time.time;
+        _delayFiring = Time.time;
+        if (_weapon is GunItem gun)
+        {
+            _magazineSize = gun.MagazineSize;
+            _currentMagazine = _magazineSize;
+            _timeToReload = gun.TimeReload;
+        }
+        else _currentMagazine = 1; // if use melee weapon
     }
     // Update is called once per frame
     void Update()
