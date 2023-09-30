@@ -17,6 +17,7 @@ public class HealthSystem : MonoBehaviour, IDamagble
     public int HP { get => _HP; }
     public bool IsDead { get => _isDead; }
 
+
     private void OnValidate()
     {
         _HP = Mathf.Clamp(_HP, 0, _maxHealth);
@@ -24,6 +25,7 @@ public class HealthSystem : MonoBehaviour, IDamagble
 
     public void TakeDamage(int damage)
     {
+        if (_isDead) return;
         if (damage <= 0) damage *= -1;
         _HP -= damage;
         OnHealthChange.Invoke((float)_HP / _maxHealth);

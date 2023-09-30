@@ -12,7 +12,7 @@ public class CollectorSystem : MonoBehaviour, IPickable
     public bool Overflowing { get => Inventory.Overflowing; }
 
 
-    public void PickUp(IItem item, int count)
+    public void PickUp(Item item, int count)
     {
         print($"Игрок подобрал {item.Name}");
         if (!item.IsStored) count = 1;

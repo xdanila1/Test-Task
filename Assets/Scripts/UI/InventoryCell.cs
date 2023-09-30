@@ -14,19 +14,19 @@ public class InventoryCell : MonoBehaviour
 
     [Header("Cells Info")]
     [SerializeField] TextMeshProUGUI _countUI;
-    [SerializeField] bool _overflowing; // max count 64
+    [SerializeField] bool _overflowing;
     [SerializeField] bool _isEmpty =true;
     [SerializeField] Image _selectIcon;
 
-    private IItem _item;
+    [SerializeField]private Item _item;
 
     public int IdCell { get; set; }
-    public IItem Item { get => _item;}
+    public Item Item { get => _item;}
     public bool isEmpty{ get => _isEmpty;}
     public int Count { get => _count; }
 
 
-    public void RenderItem(IItem item, int count)
+    public void RenderItem(Item item, int count)
     {
         print("Render Item");
         if(item.IsStored)

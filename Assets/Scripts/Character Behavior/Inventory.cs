@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private InventoryCell[] _cellsInventory;
     
 
-    public Action<IItem> onItemAdded;
+    public Action<Item> onItemAdded;
     private bool _inventoryOverflowing;
     public bool Overflowing { get => _inventoryOverflowing; }
 
@@ -46,7 +46,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddItem(IItem item, int count)
+    public void AddItem(Item item, int count)
     {
         int idEmptyCell=-1;
         print($"В инвентарь добавлено {item.Name} в количестве {count} штук(и)");

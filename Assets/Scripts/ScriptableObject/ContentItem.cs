@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu(menuName = "Items/Simple item", fileName = "New simple item")]
-public class ContentItem : ScriptableObject, IItem
+public class ContentItem :  Item
 {
     [SerializeField] private string _name;
     [SerializeField] private string _description;
@@ -12,9 +12,9 @@ public class ContentItem : ScriptableObject, IItem
     [SerializeField] private bool _isStored;
 
 
-    public string Name { get => _name; }
-    public string Description { get => _description; }
-    public Sprite Icon { get => _icon; }
-    public bool IsStored {get =>_isStored;}
+    public override string Name { get => _name; }
+    public override string Description { get => _description; }
+    public override Sprite Icon { get => _icon; }
+    public override bool IsStored {get =>_isStored;}
 
 }

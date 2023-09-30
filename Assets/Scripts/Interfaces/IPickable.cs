@@ -6,5 +6,5 @@ public interface IPickable
 {
     Inventory Inventory { get; }
     bool Overflowing { get; }
-    public void PickUp(IItem item, int count);
+    public void PickUp(Item item, int count);
 }

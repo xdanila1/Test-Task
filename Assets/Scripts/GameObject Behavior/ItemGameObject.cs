@@ -7,28 +7,32 @@ using TMPro;
 [RequireComponent(typeof(BoxCollider2D), typeof(SpriteRenderer))]
 public class ItemGameObject : MonoBehaviour
 {
-    [SerializeField] private ScriptableObject _asset;
-    [SerializeField] private int count=1;
+    [SerializeField] private Item _item;
+    [SerializeField] private int _count=1;
 
     private SpriteRenderer _sprite;
-    private IItem _item;
+
+    public Item Item { get=> _item; set=> _item= value; } 
+    public int Count { get =>_count; set=> _count=value; }
 
     private void OnValidate()
     {
-        if (!(_asset is IItem asset)) Debug.LogError("Передаваемый объект не является игровым предметом");
-        //if (!_item.IsStored && count != 1) Debug.LogWarning("Предмет не поддерживает множественный стак");
+        if (_sprite == null) return;
+
+        _sprite = GetComponent<SpriteRenderer>();
+        _sprite.sprite = _item.Icon;
     }
 
     private void Start()
     {
-        _item = (IItem)_asset;
+        GetComponent<BoxCollider2D>().isTrigger = true;
         _sprite = GetComponent<SpriteRenderer>();
         _sprite.sprite = _item.Icon;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var collector = collision.gameObject.GetComponent<IPickable>();
-        if (collector != null && !collector.Overflowing) collector.PickUp(_item, count);
+        if (collector != null && !collector.Overflowing) collector.PickUp(_item, _count);
         else return;
         Destroy(this.gameObject);
     }

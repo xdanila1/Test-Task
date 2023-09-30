@@ -5,11 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Items/Weapon/Gun1 Weapon", fileName = "New Gun Weapon")]
 public class GunItem : Weapon, IGun
 {
-    [SerializeField] private int _damage;
+    [SerializeField] private int _damage; // Weapon
     [SerializeField] private float _fireRate;
     [SerializeField] private AudioClip _shotSound;
 
-    [SerializeField] private AmmunitionItem _ammo;
+    [SerializeField] private AmmunitionItem _ammo; // IGun
     [SerializeField] private int _magazineSize;
     [SerializeField] private float _timeReload;
 
@@ -18,10 +18,6 @@ public class GunItem : Weapon, IGun
     public override float FireRate { get => _fireRate; }
     public override AudioClip ShotSound { get => _shotSound; }
 
-    public override void Attack()
-    {
-
-    }
 
 
     //IGun
