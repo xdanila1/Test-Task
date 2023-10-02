@@ -20,6 +20,8 @@ public class InventoryCell : MonoBehaviour
 
     [SerializeField]private Item _item;
 
+    private GameObject _dragObject;
+
     public int IdCell { get; set; }
     public Item Item { get => _item;}
     public bool isEmpty{ get => _isEmpty;}
@@ -62,5 +64,26 @@ public class InventoryCell : MonoBehaviour
     public void Deselect()
     {
         _selectIcon.enabled = false;
+    }
+    public void CreateDragIcon()
+    {
+        print("Создался объект");
+        _dragObject = new GameObject("DragObject");
+        _dragObject.transform.SetParent(transform.root);
+        _dragObject.transform.SetAsLastSibling();
+        if (!isEmpty) _dragObject.AddComponent<Image>().sprite = Item.Icon;
+    }
+    public void Drag()
+    {
+
+        print($"Drag: {_dragObject}");
+        _dragObject.transform.position = Input.mousePosition;
+
+    }
+    public void test2()
+    {
+        Destroy(_dragObject);
+        _dragObject = null;
+        print($"Отпустил на объекте: {gameObject.name}");
     }
 }
