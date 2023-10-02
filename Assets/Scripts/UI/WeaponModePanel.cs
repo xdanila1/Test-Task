@@ -17,9 +17,11 @@ public class WeaponModePanel : MonoBehaviour
     {
         if (weapon is GunItem gun)
         {
+            _isAutoGun = gun.IsAutomatic;
             if (gun.IsAutomatic)
             {
                 SetAutoMode();
+                
                 return;
             }
         }
@@ -34,7 +36,7 @@ public class WeaponModePanel : MonoBehaviour
     }
     public void SetAutoMode()
     {
-        //if (!_isAutoGun) return;
+        if (!_isAutoGun) return;
         _singlemodeIcon.enabled = false;
         _automodeIcon.enabled = true;
         OnSetAutoMode.Invoke(true);

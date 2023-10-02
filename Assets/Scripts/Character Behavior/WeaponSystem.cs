@@ -39,6 +39,12 @@ public class WeaponSystem : MonoBehaviour
     {
         _isAutoMode = isAuto;
     }
+
+    public void SetWeapon(Weapon weapon)
+    {
+        _weapon = weapon;
+        InitializationWeapons();
+    }
     public void PressAttack()
     {
         print("Зажата атака");
@@ -100,6 +106,10 @@ public class WeaponSystem : MonoBehaviour
 
     private void Start()
     {
+        InitializationWeapons();
+    }
+    private void InitializationWeapons()
+    {
         _shotSound.clip = _weapon.ShotSound;
         _delayFiring = Time.time;
         if (_weapon is GunItem gun)
@@ -109,7 +119,8 @@ public class WeaponSystem : MonoBehaviour
             _timeToReload = gun.TimeReload;
         }
         else _currentMagazine = 1; // if use melee weapon
+        _magazineUI.text = $"{_currentMagazine}/{_magazineSize}";
+        _SpriteWeapon.sprite = _weapon.Icon;
         OnChange.Invoke(_weapon);
     }
-
 }

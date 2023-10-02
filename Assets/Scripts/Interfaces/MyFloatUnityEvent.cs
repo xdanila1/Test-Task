@@ -9,5 +9,7 @@ public class MyFloatUnityEvent : UnityEvent<float> { }
 public class MyBoolUnityEvent : UnityEvent<bool> { }
 [System.Serializable]
 public class MyWeaponUnityEvent : UnityEvent<Weapon> { }
+[System.Serializable]
+public class MyIntUnityEvent : UnityEvent<int> { }
 
 
