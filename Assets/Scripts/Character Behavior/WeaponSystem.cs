@@ -20,9 +20,11 @@ public class WeaponSystem : MonoBehaviour
     private HealthSystem _target;
     private int _magazineSize;
     private int _currentMagazine;
+    private bool _isAutoMode; // current state
 
     public UnityEvent OnAttack;
     public UnityEvent OnReload;
+    public MyWeaponUnityEvent OnChange;
 
     public void Reload()
     {
@@ -33,8 +35,14 @@ public class WeaponSystem : MonoBehaviour
         print($"Время:{Time.time}  Время когда можно стрелять {_delayReload}");
         OnReload.Invoke();
     }
+    public void SetWeaponMode(bool isAuto)
+    {
+        _isAutoMode = isAuto;
+    }
     public void PressAttack()
     {
+        print("Зажата атака");
+        if (!_isAutoMode) return;
         InvokeRepeating("AttackWeapon", 0, 0.05f);
     }
     public void StopAttack()
@@ -44,6 +52,7 @@ public class WeaponSystem : MonoBehaviour
 
     public void AttackWeapon()
     {
+        print("Атака");
         //if (_target == null) return;
         if (Time.time < _delayFiring) return;
         if (Time.time < _delayReload) return;
@@ -60,10 +69,14 @@ public class WeaponSystem : MonoBehaviour
         if(_target==null) _target = FindEnemy();
         else
         {
+            if (_target.IsDead || Vector2.Distance(_target.transform.position,transform.position) > _rangeAttack)
+            {
+                _target = null;
+                return;
+            }
             
             print("Атака на :"+_target);
             _target.TakeDamage(_weapon.Damage);
-            if (_target.IsDead) _target = null;
             _currentMagazine--;
             _magazineUI.text = $"{_currentMagazine}/{_magazineSize}";
             OnAttack.Invoke();
@@ -96,12 +109,7 @@ public class WeaponSystem : MonoBehaviour
             _timeToReload = gun.TimeReload;
         }
         else _currentMagazine = 1; // if use melee weapon
-    }
-    // Update is called once per frame
-    void Update()
-    {
-
-        if (Input.GetKey(KeyCode.Space)) AttackWeapon();
+        OnChange.Invoke(_weapon);
     }
 
 }

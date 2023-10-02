@@ -8,8 +8,10 @@ public class GunItem : Weapon, IGun
     [SerializeField] private int _damage; // Weapon
     [SerializeField] private float _fireRate;
     [SerializeField] private AudioClip _shotSound;
+    [Space(5)]
 
     [SerializeField] private AmmunitionItem _ammo; // IGun
+    [SerializeField] private bool _isAutomatic;
     [SerializeField] private int _magazineSize;
     [SerializeField] private float _timeReload;
 
@@ -24,6 +26,7 @@ public class GunItem : Weapon, IGun
     public AmmunitionItem Ammo { get => _ammo; }
     public int MagazineSize { get => _magazineSize; }
     public float TimeReload { get => _timeReload; }
+    public bool IsAutomatic { get => _isAutomatic;}
 
- 
+
 }

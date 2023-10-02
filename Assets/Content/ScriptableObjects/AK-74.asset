@@ -22,5 +22,6 @@ MonoBehaviour:
   _fireRate: 6
   _shotSound: {fileID: 8300000, guid: 74415e185813738448e6d650463c3cdc, type: 3}
   _ammo: {fileID: 11400000, guid: ab1a25d19ba4c1241b60d4e9e6b44bf1, type: 2}
+  _isAutomatic: 1
   _magazineSize: 30
   _timeReload: 3.6

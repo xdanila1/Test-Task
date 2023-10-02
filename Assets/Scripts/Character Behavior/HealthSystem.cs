@@ -12,7 +12,7 @@ public class HealthSystem : MonoBehaviour, IDamagble
 
     private bool _isDead=false;
 
-    public MyUnityEvent OnHealthChange;
+    public MyFloatUnityEvent OnHealthChange;
     public UnityEvent OnDead;
     public int HP { get => _HP; }
     public bool IsDead { get => _isDead; }

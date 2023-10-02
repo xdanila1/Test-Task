@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public interface IGun //: Weapon
 {
+    bool IsAutomatic { get; } // лучше использовать enum
     int MagazineSize { get; }
     float TimeReload { get; }
     AmmunitionItem Ammo { get; }

@@ -25,10 +25,11 @@ public class AnimateManager : MonoBehaviour
     {
         //check clip played
         //if(!_anim.GetCurrentAnimatorStateInfo(0).IsName("Attack Animation")) _anim.SetTrigger("Attack");
-        _anim.SetBool("IsAttack",true);
+        if(!_anim.GetBool("IsAttack"))_anim.SetBool("IsAttack",true);
     }
     public void StopAttackAnimation()
     {
+        print("Остановилось");
         _anim.SetBool("IsAttack", false);
     }
 
