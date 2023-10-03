@@ -66,7 +66,6 @@ public class Inventory : MonoBehaviour
                 _cellsInventory[idEmptyCell].RenderItem(item, count);
             }
         }
-        print("Пустая ячейка на: " + idEmptyCell);
         if (idEmptyCell < 0) _inventoryOverflowing = true;
         onItemAdded?.Invoke(item);
     }

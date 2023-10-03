@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
-
-public class InventoryCell : MonoBehaviour
+public class InventoryCell : MonoBehaviour, IDropHandler
 {
     [Header("Item Info")]
     [SerializeField] Image _imageUI;
@@ -30,7 +30,6 @@ public class InventoryCell : MonoBehaviour
 
     public void RenderItem(Item item, int count)
     {
-        print("Render Item");
         if(item.IsStored)
         {
             _countUI.enabled = true;
@@ -42,7 +41,6 @@ public class InventoryCell : MonoBehaviour
                 return;
             }
         }
-        print("Заполнение данных ячейки");
         _item = item;
         _imageUI.sprite = item.Icon;
         _imageUI.enabled = true;
@@ -65,25 +63,13 @@ public class InventoryCell : MonoBehaviour
     {
         _selectIcon.enabled = false;
     }
-    public void CreateDragIcon()
-    {
-        print("Создался объект");
-        _dragObject = new GameObject("DragObject");
-        _dragObject.transform.SetParent(transform.root);
-        _dragObject.transform.SetAsLastSibling();
-        if (!isEmpty) _dragObject.AddComponent<Image>().sprite = Item.Icon;
-    }
-    public void Drag()
-    {
 
-        print($"Drag: {_dragObject}");
-        _dragObject.transform.position = Input.mousePosition;
-
-    }
-    public void test2()
+    public void OnDrop(PointerEventData eventData)
     {
-        Destroy(_dragObject);
-        _dragObject = null;
-        print($"Отпустил на объекте: {gameObject.name}");
+        if (!_isEmpty) return;
+        DragAndDropCell dropcell = eventData.pointerDrag.GetComponent<DragAndDropCell>();
+        if (dropcell.Cell.isEmpty) return;
+        RenderItem(dropcell.Cell.Item, dropcell.Cell.Count);
+        dropcell.Cell.DeleteCell();
     }
 }
