@@ -38,3 +38,10 @@ https://play.google.com/store/apps/details?id=com.dawinstone.b2ba&hl=ru&gl=US
 Материал для задания:
 https://drive.google.com/drive/folders/1e6FPN6GtkNFenLcuoeMBK9RymXDlZF0e?usp=share_link
 Желаем удачи!
+
+Новые правки:
+1. Добавить возможность смены снаряжения или смены оружия быстрой.
+
+2. Систему drag & drop в инвентаре(перемещение предметов) внтури инвентаря
+
+3. Тип стрельбы (автоматическое, одиночное)
